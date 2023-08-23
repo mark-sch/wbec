@@ -2,24 +2,24 @@
 
 #include <Arduino.h>
 #include <ArduinoOTA.h>
-#include <button.h>
-#include <globalConfig.h>
-#include <goEmulator.h>
-#include <inverter.h>
+#include "button.h"
+#include "globalConfig.h"
+#include "goEmulator.h"
+#include "inverter.h"
 #include <LittleFS.h>
-#include <loadManager.h>
-#include <logger.h>
-#include <mbComm.h>
-#include <mqtt.h>
-#include <phaseCtrl.h>
-#include <powerfox.h>
-#include <pvAlgo.h>
-#include <rfid.h>
-#include <shelly.h>
+#include "loadManager.h"
+#include "logger.h"
+#include "mbComm.h"
+#include "mqtt.h"
+#include "phaseCtrl.h"
+  #include "powerfox.h"
+  #include "pvAlgo.h"
+  #include "rfid.h"
+  #include "shelly.h"
 #define WIFI_MANAGER_USE_ASYNC_WEB_SERVER
-#include <WiFiManager.h>
-#include <webServer.h>
-#include <webSocket.h>
+#include "WiFiManager.h"
+#include "webServer.h"
+#include "webSocket.h"
 
 
 static bool _handlingOTA = false;
@@ -29,8 +29,8 @@ void setup() {
   Serial.begin(115200);
   Serial.println(F("\n\nStarting wbec ;-)"));
   logger_allocate();
-  
-  if(!LittleFS.begin()){ 
+
+  if (!LittleFS.begin()) {
     Serial.println(F("An Error has occurred while mounting LittleFS"));
     return;
   }
@@ -58,7 +58,7 @@ void setup() {
   ArduinoOTA.setHostname("wbec");
   ArduinoOTA.begin();
 
-  ArduinoOTA.onStart([]() 
+  ArduinoOTA.onStart([]()
   {
     _handlingOTA = true;
   });
@@ -79,7 +79,7 @@ void setup() {
 
 void loop() {
   ArduinoOTA.handle();
-  if(!_handlingOTA) {
+  if (!_handlingOTA) {
     logger_loop();
     mb_loop();
     goE_handle();
@@ -87,14 +87,14 @@ void loop() {
     webServer_loop();
     webSocket_loop();
     rfid_loop();
-    powerfox_loop(); 
+    powerfox_loop();
     shelly_loop();
     inverter_loop();
     btn_loop();
     pv_loop();
-    //pc_handle();
+    pc_handle();
     lm_loop();
-    if (cfgLoopDelay <= 10) {          // see #18, might have an effect to reactivity of webserver in some environments 
+    if (cfgLoopDelay <= 10) {          // see #18, might have an effect to reactivity of webserver in some environments
       delay(cfgLoopDelay);
     }
   }

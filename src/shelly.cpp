@@ -4,11 +4,11 @@
 #include <ArduinoJson.h>
 #include <ESP8266WiFi.h>
 #include <ESP8266HTTPClient.h>
-#include <globalConfig.h>
+#include "globalConfig.h"
 #include <IPAddress.h>
-#include <logger.h>
-#include <pvAlgo.h>
-#include <shelly.h>
+#include "logger.h"
+#include "pvAlgo.h"
+#include "shelly.h"
 
 const uint8_t m = 12;
 

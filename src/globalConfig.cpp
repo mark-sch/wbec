@@ -2,9 +2,9 @@
 // based on https://github.com/esp8266/Arduino/blob/master/libraries/esp8266/examples/ConfigFile/ConfigFile.ino
 
 #include <ArduinoJson.h>
-#include <globalConfig.h>
+#include "globalConfig.h"
 #include <LittleFS.h>
-#include <logger.h>
+#include "logger.h"
 
 const uint8_t m = 5;
 

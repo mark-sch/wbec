@@ -1,9 +1,9 @@
 // Copyright (c) 2021 steff393, MIT license
 
 #include <Arduino.h>
-#include <globalConfig.h>
-#include <loadManager.h>
-#include <mbComm.h>
+#include "globalConfig.h"
+#include "loadManager.h"
+#include "mbComm.h"
 
 #define CYCLE_TIME		             500	// ms
 

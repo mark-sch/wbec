@@ -91,7 +91,7 @@ static bool cbWrite(Modbus::ResultCode event, uint16_t transactionId, void* data
 		modbusFailureCnt[id] = 0;
 		// tell load manager that the current register was successfully read
 		if (msgCnt == 6+1) {
-			lm_currentReadSuccess(id);
+			//lm_currentReadSuccess(id);
 		}
 	}
 	

@@ -3,11 +3,11 @@
 #include <Arduino.h>
 #include <AsyncJson.h>
 #include <ArduinoJson.h>
-#include <globalConfig.h>
-#include <inverter.h>
+#include "globalConfig.h"
+#include "inverter.h"
 #include <IPAddress.h>
 #include <ModbusIP_ESP8266.h>
-#include <pvAlgo.h>
+#include "pvAlgo.h"
 
 
 static IPAddress remote;   // Address of Modbus Slave device

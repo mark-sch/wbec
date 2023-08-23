@@ -2,12 +2,12 @@
 
 #include <Arduino.h>
 #include <ArduinoJson.h>
-#include <globalConfig.h>
+#include "globalConfig.h"
 #include <LittleFS.h>
-#include <logger.h>
-#include <loadManager.h>
-#include <mbComm.h>
-#include <pvAlgo.h>
+#include "logger.h"
+#include "loadManager.h"
+#include "mbComm.h"
+#include "pvAlgo.h"
 #include <RTCVars.h>
 
 

@@ -2,10 +2,10 @@
 
 #include <Arduino.h>
 #include <ArduinoJson.h>
-#include <globalConfig.h>
-#include <logger.h>
-#include <powerfox.h>
-#include <pvAlgo.h>
+#include "globalConfig.h"
+#include "logger.h"
+#include "powerfox.h"
+#include "pvAlgo.h"
 #include <umm_malloc/umm_heap_select.h>
 
 #include <ESP8266HTTPClient.h>

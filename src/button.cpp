@@ -2,11 +2,11 @@
 
 #include <Arduino.h>
 #include <Bounce2.h>
-#include <globalConfig.h>
-#include <pvAlgo.h>
-#include <rfid.h>
-#include <loadManager.h>
-#include <mbComm.h>
+#include "globalConfig.h"
+#include "pvAlgo.h"
+#include "rfid.h"
+#include "loadManager.h"
+#include "mbComm.h"
 
 #define POWER_LOSS_DELAY       3000   // ms
 #define BOXID                     0		// only 1 box supported

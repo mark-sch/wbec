@@ -1,11 +1,11 @@
 // Copyright (c) 2021 steff393, MIT license
 
 #include <Arduino.h>
-#include <globalConfig.h>
+#include "globalConfig.h"
 #include <LittleFS.h>
-#include <logger.h>
-#include <loadManager.h>
-#include <mbComm.h>
+#include "logger.h"
+#include "loadManager.h"
+#include "mbComm.h"
 #include <MFRC522.h>
 #include <SPI.h>
 
