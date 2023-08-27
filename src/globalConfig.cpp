@@ -61,7 +61,7 @@ static bool createConfig() {
 	StaticJsonDocument<128> doc;
 
 	// default configuration parameters
-	doc["cfgApPass"]              = F("wbec1234"); // older version had "cebw1234"
+	doc["cfgApPass"]              = F("12345678"); // older version had "cebw1234"
 	doc["cfgCntWb"]               = 1;
 	
 	File configFile = LittleFS.open(F("/cfg.json"), "w");
@@ -123,19 +123,19 @@ void loadConfig() {
 		deserializeJson(doc, F("{}"));
 	}
 
-	strncpy(cfgApSsid,          doc["cfgApSsid"]             | "wbec",             sizeof(cfgApSsid));
-	strncpy(cfgApPass,          doc["cfgApPass"]             | "wbec1234",         sizeof(cfgApPass));
+	strncpy(cfgApSsid,          doc["cfgApSsid"]             | "Sunny5-Tinybox",             sizeof(cfgApSsid));
+	strncpy(cfgApPass,          doc["cfgApPass"]             | "12345678",         sizeof(cfgApPass));
 	cfgCntWb                  = doc["cfgCntWb"]              | 1;
 	cfgMbCycleTime            = doc["cfgMbCycleTime"]        | 10; 
 	cfgMbDelay                = doc["cfgMbDelay"]            | 100UL; 
 	cfgMbTimeout              = doc["cfgMbTimeout"]          | 60000UL;
 	cfgStandby                = doc["cfgStandby"]            | 4UL; 
 	cfgFailsafeCurrent        = doc["cfgFailsafeCurrent"]    | 0UL; 
-	strncpy(cfgMqttIp,          doc["cfgMqttIp"]             | "",                 sizeof(cfgMqttIp));
+	strncpy(cfgMqttIp,          doc["cfgMqttIp"]             | "smartbox.local",                 sizeof(cfgMqttIp));
 	cfgMqttPort               = doc["cfgMqttPort"]           | 1883UL;
 	strncpy(cfgMqttUser,        doc["cfgMqttUser"]           | "",                 sizeof(cfgMqttUser));
 	strncpy(cfgMqttPass,        doc["cfgMqttPass"]           | "",                 sizeof(cfgMqttPass));
-	strncpy(cfgMqttWattTopic,   doc["cfgMqttWattTopic"]      | "wbec/pv/setWatt",  sizeof(cfgMqttWattTopic));
+	strncpy(cfgMqttWattTopic,   doc["cfgMqttWattTopic"]      | "tinybox/pv/setWatt",  sizeof(cfgMqttWattTopic));
 	strncpy(cfgMqttWattJson,    doc["cfgMqttWattJson"]       | "",                 sizeof(cfgMqttWattJson));
 	strncpy(cfgNtpServer,       doc["cfgNtpServer"]          | "europe.pool.ntp.org", sizeof(cfgNtpServer));
 	strncpy(cfgFoxUser,         doc["cfgFoxUser"]            | "",                 sizeof(cfgFoxUser));

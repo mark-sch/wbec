@@ -23,11 +23,12 @@
 
 
 static bool _handlingOTA = false;
+String hostname = "Sunny5-Tinybox";
 
 
 void setup() {
   Serial.begin(115200);
-  Serial.println(F("\n\nStarting wbec ;-)"));
+  Serial.println(F("\n\nStarting Tinyox ;-)"));
   logger_allocate();
 
   if (!LittleFS.begin()) {
@@ -41,6 +42,7 @@ void setup() {
   char ssid[32]; strcpy(ssid, cfgApSsid);
   char pass[63]; strcpy(pass, cfgApPass);
   wifiManager.setConnectTimeout(cfgWifiConnectTimeout);
+  //wifiManager.setHostname(hostname.c_str()); //define hostname
   wifiManager.autoConnect(ssid, pass);
 
   // still experimental (see #12):
@@ -55,7 +57,7 @@ void setup() {
   webSocket_setup();
 
   // setup the OTA server
-  ArduinoOTA.setHostname("wbec");
+  ArduinoOTA.setHostname("tinybox");
   ArduinoOTA.begin();
 
   ArduinoOTA.onStart([]()
