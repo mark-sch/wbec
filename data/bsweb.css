@@ -1,0 +1,236 @@
+:root {
+	--theme-color-1: rgb(106, 106, 106);
+	--theme-color-2: rgb(234, 35, 35);
+	--theme-color-3: rgb(255, 255, 255);
+	--theme-color-4: rgb(0, 0, 0);
+	--theme-color-5: rgb(169, 169, 169);
+}
+
+:root {
+	--body-background-color: var(--theme-color-1);
+
+	--container-width-min: 250px;
+	--container-width-max: 800px;
+
+	--headline-1-color: var(--theme-color-2);
+	--headline-2-color: var(--theme-color-3);
+
+	--box-background-color: var(--theme-color-3);
+	--box-text-color: var(--theme-color-4);
+	--main-disabled: var(--theme-color-5);
+
+	--grid-size: 10px;
+	--main-border-radius: var(--grid-size);
+}
+
+
+h1 {
+	color: var(--headline-1-color);
+	text-align: center;
+	font-size: 2em;
+}
+
+h2 {
+	color: var(--headline-2-color);
+	text-align: center;
+	font-size: 1.25em;
+	font-weight: normal;
+}
+
+footer {
+	margin-top: 20px;
+	text-align: center;
+	font-size: 0.75em;
+}
+
+.top-nav {
+	text-align: right;
+}
+.top-nav-item {
+	font-weight: bold;
+}
+.top-nav-text {
+	font-weight: normal;
+}
+
+.box-group {
+	margin: 0 calc(var(--grid-size) * -1);
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.box-group .box {
+	margin: var(--grid-size);
+	flex: 1 0 34%; /* allow max 2 items per row */
+}
+
+.box {
+	background-color: var(--box-background-color);
+	color: var(--box-text-color);
+	border-radius: var(--main-border-radius);
+	padding: var(--grid-size) calc(2*var(--grid-size)) calc(2*var(--grid-size));
+}
+
+.box-header {
+	color: var(--headline-1-color);
+	margin-top: 0;
+}
+
+.box-header svg {
+	fill: var(--headline-1-color);
+}
+
+.box-content {
+	font-weight: bold;
+	text-align: center;
+}
+
+.value {
+	display: block;
+}
+
+.not-available {
+	display: none !important;
+}
+
+button {
+	background: none!important;
+	border: none;
+	padding: 15px 15px!important;
+	line-height: 20px;
+	font-size: 12px;
+    font-weight: 500;
+	text-decoration: none;
+    text-transform: uppercase;
+    transition: all 0.2s linear;
+	cursor: pointer;
+}
+
+button:hover {
+	color: #ed1a22;
+	background-color: transparent; 
+}
+
+.btn {
+	border-radius: var(--main-border-radius);
+	padding: var(--grid-size);
+	border: none;
+	cursor: pointer;
+}
+
+.box .btn {
+	background-color: var(--body-background-color);
+	color: var(--box-background-color);
+	font-size: 1.2rem;
+	margin-bottom: var(--grid-size);
+}
+
+.btn svg {
+	fill: var(--box-background-color);
+}
+
+.btn.active, .btn:hover {
+	background-color: var(--headline-1-color);
+}
+
+.btn.disabled {
+	background-color: var(--main-disabled);
+}
+
+.btn.active, .btn.disabled {
+	cursor: default;
+}
+
+.btn.disabled:hover {
+	background-color: var(--main-disabled);
+}
+
+.table {
+	display: table;
+	width: calc(100% - 10px);
+  padding: 5px;
+}
+
+.table-head {
+	display: table-cell;
+	font-weight: bold;
+}
+
+.table-row {
+	display: table-row;
+}
+
+.table-cell {
+	display: table-cell;
+	font-weight: normal;
+	padding: 5px;
+}
+
+.config-table {
+	display: table;
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.config-row {
+	display: table-row;
+}
+
+.config-cell {
+	display: table-cell;
+	text-align: left;
+	font-size: 0.8em;
+	font-weight: normal;
+	padding: 5px;
+	border: 1px solid #ccc;
+}
+
+svg {
+	width: 2rem;
+	height: 2rem;
+	float: left;
+	margin: 2px 0;
+}
+
+.slider-wrapper {
+	display: flex;
+	margin: var(--grid-size) 0;
+}
+
+.slider {
+	--slider-height: 0.8rem;
+	-webkit-appearance: none; /* Override default CSS styles */
+	appearance: none;
+	width: 100%; /* Full-width */
+	margin: auto var(--grid-size);
+	height: var(--slider-height);
+	border-radius: calc(var(--slider-height) / 2);
+	background: var(--theme-color-5); /* Grey background */
+	outline: none; /* Remove outline */
+	opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+	-webkit-transition: .2s; /* 0.2 seconds transition on hover */
+	transition: opacity .2s;
+}
+
+.slider:hover {
+	opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.slider::-webkit-slider-thumb {
+	-webkit-appearance: none; /* Override default look */
+	appearance: none;
+	width: 1.5rem; /* Set a specific slider handle width */
+	height: 1.5rem;
+	border-radius: 50%;
+	background: var(--theme-color-2);
+	cursor: pointer; /* Cursor on hover */
+}
+
+.slider::-moz-range-thumb {
+	width: 1.5rem; /* Set a specific slider handle width */
+	height: 1.5rem;
+	border-radius: 50%;
+	background: var(--theme-color-2);
+	cursor: pointer; /* Cursor on hover */
+}

@@ -28,7 +28,7 @@ String hostname = "Sunny5-Tinybox";
 
 void setup() {
   Serial.begin(115200);
-  Serial.println(F("\n\nStarting Tinyox ;-)"));
+  Serial.println(F("\n\nStarting Tinybox ;-)"));
   logger_allocate();
 
   if (!LittleFS.begin()) {
@@ -96,7 +96,7 @@ void loop() {
     pv_loop();
     pc_handle();
     lm_loop();
-    if (cfgLoopDelay <= 10) {          // see #18, might have an effect to reactivity of webserver in some environments
+    if (cfgLoopDelay <= 50) {          // see #18, might have an effect to reactivity of webserver in some environments
       delay(cfgLoopDelay);
     }
   }

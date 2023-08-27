@@ -10,7 +10,7 @@
 
 // Default settings 22.05.2023
 const defaultObj = JSON.parse(
-	'{"cfgApSsid":"Sunny5-Tinybox","cfgApPass":"12345678","cfgCntWb":1,"cfgMbCycleTime":10,"cfgMbDelay":100,"cfgMbTimeout":60000,"cfgStandby":4,"cfgFailsafeCurrent":0,"cfgMqttIp":"smartbox.local","cfgMqttLp":[],"cfgMqttPort":1883,"cfgMqttUser":"","cfgMqttPass":"","cfgMqttWattTopic":"tinybox/pv/setWatt","cfgMqttWattJson":"","cfgNtpServer":"europe.pool.ntp.org","cfgFoxUser":"","cfgFoxPass":"","cfgFoxDevId":"","cfgPvActive":0,"cfgPvCycleTime":30,"cfgPvLimStart":61,"cfgPvLimStop":50,"cfgPvPhFactor":69,"cfgPvOffset":1,"cfgPvCalcMode":0,"cfgPvInvert":0,"cfgPvInvertBatt":0,"cfgPvMinTime":0,"cfgPvHttpIp":"","cfgPvHttpPath":"/","cfgPvHttpJson":"","cfgPvHttpPort":80,"cfgTotalCurrMax":0,"cfgHwVersion":15,"cfgWifiSleepMode":0,"cfgLoopDelay":255,"cfgKnockOutTimer":0,"cfgShellyIp":"","cfgInverterIp":"","cfgInverterType":0,"cfgInverterPort":0,"cfgInverterAddr":0,"cfgInvSmartAddr":0,"cfgInvRegToGrid":0,"cfgInvRegFromGrid":0,"cfgInvRegBattery":0,"cfgBootlogSize":2000,"cfgBtnDebounce":0,"cfgWifiConnectTimeout":10,"cfgEnergyOffset":0,"cfgDisplayAutoOff":2,"cfgWifiAutoReconnect":1,"cfgLedIp":1,"cfgWifiOff":0,"cfgChargeLog":0,"cfgWbecMac":237,"cfgWbecIp":""}'
+	'{"cfgApSsid":"Sunny5-Tinybox","cfgApPass":"12345678","cfgCntWb":1,"cfgMbCycleTime":10,"cfgMbDelay":100,"cfgMbTimeout":60000,"cfgStandby":4,"cfgFailsafeCurrent":0,"cfgMqttIp":"smartbox.local","cfgMqttLp":[1],"cfgMqttPort":1883,"cfgMqttUser":"","cfgMqttPass":"","cfgMqttWattTopic":"tinybox/pv/setWatt","cfgMqttWattJson":"","cfgNtpServer":"europe.pool.ntp.org","cfgFoxUser":"","cfgFoxPass":"","cfgFoxDevId":"","cfgPvActive":0,"cfgPvCycleTime":30,"cfgPvLimStart":61,"cfgPvLimStop":50,"cfgPvPhFactor":69,"cfgPvOffset":1,"cfgPvCalcMode":0,"cfgPvInvert":0,"cfgPvInvertBatt":0,"cfgPvMinTime":0,"cfgPvHttpIp":"","cfgPvHttpPath":"/","cfgPvHttpJson":"","cfgPvHttpPort":80,"cfgTotalCurrMax":0,"cfgHwVersion":15,"cfgWifiSleepMode":0,"cfgLoopDelay":2,"cfgKnockOutTimer":0,"cfgShellyIp":"","cfgInverterIp":"","cfgInverterType":0,"cfgInverterPort":0,"cfgInverterAddr":0,"cfgInvSmartAddr":0,"cfgInvRegToGrid":0,"cfgInvRegFromGrid":0,"cfgInvRegBattery":0,"cfgBootlogSize":2000,"cfgBtnDebounce":0,"cfgWifiConnectTimeout":10,"cfgResetOnTimeout":0,"cfgEnergyOffset":0,"cfgDisplayAutoOff":2,"cfgWifiAutoReconnect":1,"cfgLedIp":1,"cfgWifiOff":0,"cfgChargeLog":0,"cfgWbecMac":237,"cfgWbecIp":""}'
 );
 
 const descObj = {
@@ -64,6 +64,7 @@ const descObj = {
 	cfgBootlogSize         :"(!) intern",
 	cfgBtnDebounce         :"[ms] Entprellzeit für Taster, z.B. 300",
 	cfgWifiConnectTimeout  :"(!) (s) Wartezeit bis wbec bei fehlendem WLAN einen eigenen Access Point öffnet",
+	cfgResetOnTimeout      :"(!) Nullen aller Werte bei Modbus-Timeout",
 	cfgEnergyOffset        :"[Wh] Offset, der vom Energiezähler abgezogen werden kann",
 	cfgDisplayAutoOff      :"[min] Wartezeit für Displayabschaltung",
 	cfgWifiAutoReconnect   :"(!) intern",
@@ -81,10 +82,10 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	document.getElementById('btnLog'). addEventListener('click', function() {window.location.href = "/log.html"});
 	document.getElementById('btnCfg'). addEventListener('click', function() {window.location.href = "/cfg.html"});
-	document.getElementById('btnJson').addEventListener('click', function() {window.location.href = "/json"});
+	if (document.getElementById('btnJson') != undefined) document.getElementById('btnJson').addEventListener('click', function() {window.location.href = "/json"});
 	document.getElementById('btnEdit').addEventListener('click', function() {window.location.href = "/edit"});
 	document.getElementById('btnUpd'). addEventListener('click', function() {window.location.href = "/update"});
-	document.getElementById('btnExit').addEventListener('click', function() {window.location.href = "/"});
+	if (document.getElementById('btnExit') != undefined) document.getElementById('btnExit').addEventListener('click', function() {window.location.href = "/"});
 
 	const settings = {};
 

@@ -6,10 +6,10 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	document.getElementById('btnLog'). addEventListener('click', function() {window.location.href = "/log.html"});
 	document.getElementById('btnCfg'). addEventListener('click', function() {window.location.href = "/cfg.html"});
-	document.getElementById('btnJson').addEventListener('click', function() {window.location.href = "/json"});
+	if (document.getElementById('btnJson') != undefined) document.getElementById('btnJson').addEventListener('click', function() {window.location.href = "/json"});
 	document.getElementById('btnEdit').addEventListener('click', function() {window.location.href = "/edit"});
 	document.getElementById('btnUpd'). addEventListener('click', function() {window.location.href = "/update"});
-	document.getElementById('btnExit').addEventListener('click', function() {window.location.href = "/"});
+	if (document.getElementById('btnExit') != undefined) document.getElementById('btnExit').addEventListener('click', function() {window.location.href = "/"});
 
 	function init() {
 		for (const element of tableHeaders) {
