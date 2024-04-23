@@ -48,7 +48,7 @@ uint8_t  cfgLoopDelay;                // Delay [ms] at end of main loop, might h
 uint16_t cfgKnockOutTimer;            // Interval[min] after which wbec knocks itself out, i.e. triggers a reset, default: 0 = inactive; values < 20min not allowed
 char     cfgShellyIp[16];             // IP address of Shelly 3em, "" to disable 
 char     cfgInverterIp[16];           // IP address of Inverter, "" to disable 
-uint8_t  cfgInverterType;             // 0=off, 1=SolarEdge, 2=Fronius, 3=Kostal
+uint8_t  cfgInverterType;             // 0=off, 1=SolarEdge, 2=Fronius, 3=Kostal, 40=SDM630_MB_TCP, 50=SDM630_MB_RTU
 uint16_t cfgInverterPort;             // Overwrite default inverter port setting
 uint16_t cfgInverterAddr;             // Overwrite default inverter address setting
 uint16_t cfgInvSmartAddr;             // Overwrite default smart meter address setting
@@ -56,13 +56,15 @@ uint16_t cfgBootlogSize;              // Size of the bootlog buffer for debuggin
 uint16_t cfgBtnDebounce;              // Debounce time for button [ms]
 uint16_t cfgWifiConnectTimeout;       // Timeout in seconds to connect to Wifi before change to AP-Mode
 uint8_t  cfgResetOnTimeout;           // Set (some) Modbus values to 0 after 10x message timeout
-
+uint8_t  cfgModbusGWActive;           // General Modbus Gateway TCP<->RTU: Active (1) or inactive (0)
+uint32_t cfgRtu1BaudRate;             // baud rate for RS485 modbus rtu connector 1
+char     cfgRtu1Parity[3];            // Parity setting for RS485 modbus rtu connector 1, 8N1 or 8E1
 
 static bool createConfig() {
 	StaticJsonDocument<128> doc;
 
 	// default configuration parameters
-	doc["cfgApPass"]              = F("12345678"); // older version had "cebw1234"
+	doc["cfgApPass"]              = F("12345678"); 
 	doc["cfgCntWb"]               = 1;
 	
 	File configFile = LittleFS.open(F("/cfg.json"), "w");
@@ -165,6 +167,10 @@ void loadConfig() {
 	cfgBtnDebounce            = doc["cfgBtnDebounce"]        | 0;
 	cfgWifiConnectTimeout     = doc["cfgWifiConnectTimeout"] | 10;
 	cfgResetOnTimeout         = doc["cfgResetOnTimeout"]     | 1;
+	cfgModbusGWActive         = doc["cfgModbusGWActive"]     | 0;
+	cfgRtu1BaudRate           = doc["cfgRtu1BaudRate"]       | 19200;
+	strncpy(cfgRtu1Parity,      doc["cfgRtu1Parity"]         | "8E1",              sizeof(cfgRtu1Parity));
+	
 	
 	LOG(m, "cfgWbecVersion: %s", cfgWbecVersion);
 	LOG(m, "cfgBuildDate: %s"  , cfgBuildDate);

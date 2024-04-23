@@ -1,7 +1,11 @@
 // Copyright (c) 2021 steff393, MIT license
 
 #include <Arduino.h>
+#ifdef ESP32
+#include <WiFi.h>
+#else
 #include <ESP8266WiFi.h>
+#endif
 #include "globalConfig.h"
 #include "inverter.h"
 #include "logger.h"

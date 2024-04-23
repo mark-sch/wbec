@@ -1,8 +1,13 @@
 // Copyright (c) 2021 steff393, MIT license
 
 #include <Arduino.h>
+#ifdef ESP32
+#include <WiFi.h>
+#include <HTTPClient.h>
+#else
 #include <ESP8266WiFi.h>
 #include <ESP8266HTTPClient.h>
+#endif
 #include "logger.h"
 #include "loadManager.h"
 #include "mbComm.h"

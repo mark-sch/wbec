@@ -1,4 +1,4 @@
-// Copyright (c) 2021 steff393, MIT license
+// Copyright (c) 2021 steff393, 2023 Think5 GmbH, MIT license
 
 #include <Arduino.h>
 #include <ArduinoOTA.h>
@@ -6,16 +6,15 @@
 #include "globalConfig.h"
 #include "goEmulator.h"
 #include "inverter.h"
+#include "gateway.h"
 #include <LittleFS.h>
 #include "loadManager.h"
 #include "logger.h"
 #include "mbComm.h"
 #include "mqtt.h"
 #include "phaseCtrl.h"
-  #include "powerfox.h"
-  #include "pvAlgo.h"
-  #include "rfid.h"
-  #include "shelly.h"
+#include "pvAlgo.h"
+#include "shelly.h"
 #define WIFI_MANAGER_USE_ASYNC_WEB_SERVER
 #include "WiFiManager.h"
 #include "webServer.h"
@@ -57,7 +56,13 @@ void setup() {
   webSocket_setup();
 
   // setup the OTA server
-  ArduinoOTA.setHostname("tinybox");
+  if (cfgModbusGWActive == 1) {
+    ArduinoOTA.setHostname("gateway");
+  }
+  else {
+    ArduinoOTA.setHostname("tinybox");
+  }
+  
   ArduinoOTA.begin();
 
   ArduinoOTA.onStart([]()
@@ -67,10 +72,9 @@ void setup() {
 
   mb_setup();
   mqtt_begin();
-  rfid_setup();
-  powerfox_setup();
   shelly_setup();
   inverter_setup();
+  gateway_setup();
   btn_setup();
   pv_setup();
   lm_setup();
@@ -88,10 +92,9 @@ void loop() {
     mqtt_handle();
     webServer_loop();
     webSocket_loop();
-    rfid_loop();
-    powerfox_loop();
     shelly_loop();
     inverter_loop();
+    gateway_loop();
     btn_loop();
     pv_loop();
     pc_handle();

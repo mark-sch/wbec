@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+
+<html lang="de">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#4DA5F4" />
+    <meta name="csrf-token" />
+    <title>Tinybox - Log</title>
+    <link
+      rel="shortcut icon"
+      href="http://mark.sunny5.de:2020/smartbox/favicon.ico"
+    />
+    <link rel="stylesheet" href="https://cloud.think5.de/files/tinybox/main.css" />
+    <link rel="stylesheet" href="bsweb.css" />
+  </head>
+
+  <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <symbol id="flash" viewBox="0 0 19 36"><g transform="translate(0,36) scale(0.1,-0.1)"><path d="M87 258 l-86 -103 34 -3 33 -3 -29 -71 c-16 -39 -28 -73 -26 -75 2 -2 43 43 90 99 l87 103 -34 3 -34 3 29 71 c16 39 28 73 26 75 -2 1 -42 -43 -90 -99z"/></g></symbol>
+  </svg>
+
+  <body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="log.js" defer></script>
+    <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button
+            class="navbar-toggle"
+            type="button"
+            data-toggle="collapse"
+            data-target=".navbar-collapse"
+          >
+            <span class="sr-only">Toggle navigation</span
+            ><span class="icon-bar"></span><span class="icon-bar"></span
+            ><span class="icon-bar"></span></button
+          ><a class="navbar-brand" href="./"
+            ><i class="fa"><div id="logo"></div></i
+          ></a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active">
+              <a href="./">Home</a>
+            </li>
+            <li>
+              <button id="btnLog"  class="top-nav-text">Ladelog</button>
+            </li>
+            <li>
+              <button id="btnCfg"  class="top-nav-text">Konfiguration</button>
+            </li>
+            <li>
+              <button id="btnEdit" class="top-nav-text">Editor</button>
+            </li>
+            <li>
+              <button id="btnUpd"  class="top-nav-text">Firmware</button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+	<p>&nbsp;</p>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <section class="box-group">
+            <div class="box">
+              <h3 class="box-header">
+                <svg class="flash"><use xlink:href="#flash"></use></svg>&nbsp;<span>Ladeübersicht</span>
+              </h3>
+              <div class="box-content">
+                <div class="table" id="logTable">
+                  <div class="table-row">
+                    <div class="table-head">Start</div>
+                    <div class="table-head">Ende</div>
+                    <div class="table-head">Geladene<br>kWh</div>
+                    <div class="table-head">Ladedauer<br>hh:mm</div>
+                    <div class="table-head">Wallbox</div>
+                  </div>
+                </div>
+                <button onclick="exportToExcel()">Export CSV</button>
+              </div>
+            </div>
+          </section>        
+        </div>
+      </div>
+    </div>
+    <p>&nbsp;</p>
+    <footer>
+      <div class="container text-center">
+        <p class="pull-left">v2023.8.27.2</p>
+        <ul class="pull-right list-inline">
+          <li>© 2023 Think5 GmbH</li>
+        </ul>
+      </div>
+    </footer>
+  </body>
+</html>

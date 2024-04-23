@@ -17,9 +17,12 @@
 #define PIN_DI              5   // GPIO5, NodeMCU pin D1
 #define PIN_RO              2   // GPIO2, NodeMCU pin D4
 #define PIN_DE_RE           4   // GPIO4, NodeMCU pin D2
+#define PIN_DI_RTU2         13  // GPIO13, NodeMCU pin D7
+#define PIN_RO_RTU2         14  // GPIO14, NodeMCU pin D5
+#define PIN_DE_RE_RTU2      12  // GPIO12, NodeMCU pin D6
 #define PIN_RST             0   // GPIO0, NodeMCU pin D3 
-#define PIN_PV_SWITCH      13   // GPIO0, NodeMCU pin D7 
-#define PIN_SS             15   // GPIO15,NodeMCU pin D8
+#define PIN_PV_SWITCH      9   // GPIO13, NodeMCU pin D7 
+#define PIN_SS             10   // GPIO15,NodeMCU pin D8
 
 
 extern char     cfgWbecVersion[];	           // wbec version
@@ -59,7 +62,7 @@ extern uint8_t  cfgLoopDelay;                // Delay [ms] at end of main loop, 
 extern uint16_t cfgKnockOutTimer;            // Interval[min] after which wbec knocks itself out, i.e. triggers a reset, default: 0 = inactive; values < 20min not allowed
 extern char     cfgShellyIp[16];             // IP address of Shelly 3em, "" to disable 
 extern char     cfgInverterIp[16];           // IP address of Inverter, "" to disable 
-extern uint8_t  cfgInverterType;             // 0=off, 1=SolarEdge, 2=Fronius, 3=Kostal
+extern uint8_t  cfgInverterType;             // 0=off, 1=SolarEdge, 2=Fronius, 3=Kostal, 50=SDM630, 51=Deye_MB_TCP, 52=Deye_MB_RTU
 extern uint16_t cfgInverterPort;             // Overwrite default inverter port setting
 extern uint16_t cfgInverterAddr;             // Overwrite default inverter address setting
 extern uint16_t cfgInvSmartAddr;             // Overwrite default smart meter address setting
@@ -67,6 +70,9 @@ extern uint16_t cfgBootlogSize;              // Size of the bootlog buffer for d
 extern uint16_t cfgBtnDebounce;              // Debounce time for button [ms]
 extern uint16_t cfgWifiConnectTimeout;       // Timeout in seconds to connect to Wifi before change to AP-Mode
 extern uint8_t  cfgResetOnTimeout;           // Set (some) Modbus values to 0 after 10x message timeout
+extern uint8_t  cfgModbusGWActive;           // General Modbus Gateway TCP<->RTU: Active (1) or inactive (0)
+extern uint32_t cfgRtu1BaudRate;             // baud rate for RS485 modbus rtu connector 1
+extern char     cfgRtu1Parity[3];            // Parity setting for RS485 modbus rtu connector 1, 8N1 or 8E1
 
 
 extern void loadConfig();

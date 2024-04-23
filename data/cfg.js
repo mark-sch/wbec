@@ -10,7 +10,7 @@
 
 // Default settings 22.05.2023
 const defaultObj = JSON.parse(
-	'{"cfgApSsid":"Sunny5-Tinybox","cfgApPass":"12345678","cfgCntWb":1,"cfgMbCycleTime":10,"cfgMbDelay":100,"cfgMbTimeout":60000,"cfgStandby":4,"cfgFailsafeCurrent":0,"cfgMqttIp":"smartbox.local","cfgMqttLp":[1],"cfgMqttPort":1883,"cfgMqttUser":"","cfgMqttPass":"","cfgMqttWattTopic":"tinybox/pv/setWatt","cfgMqttWattJson":"","cfgNtpServer":"europe.pool.ntp.org","cfgFoxUser":"","cfgFoxPass":"","cfgFoxDevId":"","cfgPvActive":0,"cfgPvCycleTime":30,"cfgPvLimStart":61,"cfgPvLimStop":50,"cfgPvPhFactor":69,"cfgPvOffset":1,"cfgPvCalcMode":0,"cfgPvInvert":0,"cfgPvInvertBatt":0,"cfgPvMinTime":0,"cfgPvHttpIp":"","cfgPvHttpPath":"/","cfgPvHttpJson":"","cfgPvHttpPort":80,"cfgTotalCurrMax":0,"cfgHwVersion":15,"cfgWifiSleepMode":0,"cfgLoopDelay":2,"cfgKnockOutTimer":0,"cfgShellyIp":"","cfgInverterIp":"","cfgInverterType":0,"cfgInverterPort":0,"cfgInverterAddr":0,"cfgInvSmartAddr":0,"cfgInvRegToGrid":0,"cfgInvRegFromGrid":0,"cfgInvRegBattery":0,"cfgBootlogSize":2000,"cfgBtnDebounce":0,"cfgWifiConnectTimeout":10,"cfgResetOnTimeout":0,"cfgEnergyOffset":0,"cfgDisplayAutoOff":2,"cfgWifiAutoReconnect":1,"cfgLedIp":1,"cfgWifiOff":0,"cfgChargeLog":0,"cfgWbecMac":237,"cfgWbecIp":""}'
+	'{"cfgApSsid":"Sunny5-Tinybox","cfgApPass":"12345678","cfgCntWb":1,"cfgMbCycleTime":10,"cfgMbDelay":100,"cfgMbTimeout":60000,"cfgStandby":4,"cfgFailsafeCurrent":0,"cfgMqttIp":"smartbox.local","cfgMqttLp":[1],"cfgMqttPort":1883,"cfgMqttUser":"","cfgMqttPass":"","cfgMqttWattTopic":"tinybox/pv/setWatt","cfgMqttWattJson":"","cfgNtpServer":"europe.pool.ntp.org","cfgFoxUser":"","cfgFoxPass":"","cfgFoxDevId":"","cfgPvActive":0,"cfgPvCycleTime":30,"cfgPvLimStart":61,"cfgPvLimStop":50,"cfgPvPhFactor":69,"cfgPvOffset":1,"cfgPvCalcMode":0,"cfgPvInvert":0,"cfgPvInvertBatt":0,"cfgPvMinTime":0,"cfgPvHttpIp":"","cfgPvHttpPath":"/","cfgPvHttpJson":"","cfgPvHttpPort":80,"cfgTotalCurrMax":0,"cfgHwVersion":15,"cfgWifiSleepMode":0,"cfgLoopDelay":2,"cfgKnockOutTimer":0,"cfgShellyIp":"","cfgInverterIp":"","cfgInverterType":0,"cfgInverterPort":0,"cfgInverterAddr":0,"cfgInvSmartAddr":0,"cfgInvRegToGrid":0,"cfgInvRegFromGrid":0,"cfgInvRegBattery":0,"cfgBootlogSize":2000,"cfgBtnDebounce":0,"cfgWifiConnectTimeout":10,"cfgResetOnTimeout":0,"cfgEnergyOffset":0,"cfgDisplayAutoOff":2,"cfgWifiAutoReconnect":1,"cfgLedIp":1,"cfgWifiOff":0,"cfgChargeLog":0,"cfgWbecMac":237,"cfgWbecIp":"","cfgModbusGWActive":0,"cfgRtu1BaudRate":19200,"cfgRtu1Parity":"8E1"}'
 );
 
 const descObj = {
@@ -30,9 +30,6 @@ const descObj = {
 	cfgMqttWattTopic       :"MQTT: Topic, um den Wert Bezug/Einspeisung zu empfangen",
 	cfgMqttWattJson        :"MQTT: Suchstring, um den Wert Bezug/Einspeisung zu finden",
 	cfgNtpServer           :"NTP-Server",
-	cfgFoxUser             :"Powerfox: Benutzername",
-	cfgFoxPass             :"Powerfox: Passwort",
-	cfgFoxDevId            :"Powerfox: Device ID",
 	cfgPvActive            :"PV-Überschussregelung: 0:inaktiv, 1:aktiv",
 	cfgPvCycleTime         :"[s] PV-Überschussregelung: Zykluszeit",
 	cfgPvLimStart          :"[100mA] PV-Überschussregelung: Startstrom, z.B. 61=6,1A",
@@ -73,6 +70,9 @@ const descObj = {
 	cfgChargeLog           :"Logbuch der Ladevorgänge: 0:inaktiv, 1:aktiv",
 	cfgWbecMac             :"(!) Letztes Byte der wbec-MAC-Adresse ändern (dez.)",
 	cfgWbecIp              :"(!) stat. IP-Adresse für wbec, z.B. 192.168.178.123",
+	cfgModbusGWActive	   :"Switch into Modbus RTU<->TCP Gateway mode: 0:inaktiv, 1:aktiv",
+	cfgRtu1BaudRate		   :"Set baud rate for RS485 modbus rtu connector 1",
+	cfgRtu1Parity          :"Parity setting for RS485 modbus rtu connector 1, 8N1 or 8E1",
 }
 
 

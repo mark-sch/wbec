@@ -1,7 +1,11 @@
 // Copyright (c) 2021 steff393, MIT license
 
 #include <Arduino.h>
+#ifdef ESP32
+#include <ESPmDNS.h>
+#else
 #include <ESP8266mDNS.h>
+#endif
 #include "globalConfig.h"
 #include <LittleFS.h>
 #include "logger.h"

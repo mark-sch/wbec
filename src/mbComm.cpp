@@ -77,13 +77,13 @@ static bool cbWrite(Modbus::ResultCode event, uint16_t transactionId, void* data
 	int id = mb.slave()-1;
 	modbusResultCode[id] = event;
 	if (event) {
-		LOG(m, "Comm-Failure BusID %d", mb.slave());
+		LOG(m, "RTU1 Comm-Failure BusID %d", mb.slave());
 		if (modbusFailureCnt[id] < 250) {
 			modbusFailureCnt[id]++;
 		}
 		if (modbusFailureCnt[id] == 10) {
 			// too many consecutive timeouts --> reset values
-			LOG(m, "Timeout BusID %d", mb.slave());
+			LOG(m, "RTU1 Timeout BusID %d", mb.slave());
 			timeout(id);
 		}
 	} else {
@@ -95,43 +95,48 @@ static bool cbWrite(Modbus::ResultCode event, uint16_t transactionId, void* data
 		}
 	}
 	
-	//log(m, "ResultCode: 0x" + String(event, HEX) + ", BusID: "+ mb.slave());
+	//log(m, "RTU1 ResultCode: 0x" + String(event, HEX) + ", BusID: "+ mb.slave());
 	return(true);
 }
 
 
 void mb_setup() {
-	// setup SoftwareSerial and Modbus Master
-	LOG(m, "HwVersion: %d", cfgHwVersion);
-	if (cfgHwVersion == 10) {
-		S.begin(19200, SWSERIAL_8E1, PIN_DI, PIN_RO); // inverted
-	} else {
-		S.begin(19200, SWSERIAL_8E1, PIN_RO, PIN_DI); // Wallbox Energy Control uses 19.200 bit/sec, 8 data bit, 1 parity bit (even), 1 stop bit
-	}
-	mb.begin(&S, PIN_DE_RE);
-	mb.master();
-	for (uint8_t i = 0; i < WB_CNT; i++) {
-		modbusFailureCnt[i] = 0;
-		modbusResultCode[i] = 0;
+	// Setup only when NOT in gateway mode
+	if (cfgModbusGWActive == 0) {
+		// setup SoftwareSerial and Modbus Master
+		LOG(m, "HwVersion: %d", cfgHwVersion);
+		if (cfgHwVersion == 10) {
+			S.begin(19200, SWSERIAL_8E1, PIN_DI, PIN_RO); // inverted
+		} else {
+			S.begin(cfgRtu1BaudRate, SWSERIAL_8E1, PIN_RO, PIN_DI); // Wallbox Energy Control uses 19.200 bit/sec, 8 data bit, 1 parity bit (even), 1 stop bit
+		}
+		mb.begin(&S, PIN_DE_RE);
+		mb.master();
+		for (uint8_t i = 0; i < WB_CNT; i++) {
+			modbusFailureCnt[i] = 0;
+			modbusResultCode[i] = 0;
+		}
 	}
 }
 
 
 void mb_loop() {
-	// When pointers of the ring buffer are not equal, then there is something to send
-	if (rbOut != rbIn) {
-		if (mb_available()) {			// check, if bus available
-			rbOut = (rbOut+1) % RINGBUF_SIZE; 		// increment pointer, but take care of overflow
-			if (rb[rbOut].buf != NULL) {
-				mb.readHreg (rb[rbOut].id + 1, rb[rbOut].reg,  rb[rbOut].buf, 1, cbWrite);
-			} else {
-				mb.writeHreg(rb[rbOut].id + 1, rb[rbOut].reg, &rb[rbOut].val, 1, cbWrite); 
+	// Run only when NOT in gateway mode
+	if (cfgModbusGWActive == 0) {
+		// When pointers of the ring buffer are not equal, then there is something to send
+		if (rbOut != rbIn) {
+			if (mb_available()) {			// check, if bus available
+				rbOut = (rbOut+1) % RINGBUF_SIZE; 		// increment pointer, but take care of overflow
+				if (rb[rbOut].buf != NULL) {
+					mb.readHreg (rb[rbOut].id + 1, rb[rbOut].reg,  rb[rbOut].buf, 1, cbWrite);
+				} else {
+					mb.writeHreg(rb[rbOut].id + 1, rb[rbOut].reg, &rb[rbOut].val, 1, cbWrite); 
+				}
+				modbusLastMsgSentTime = millis();
 			}
-			modbusLastMsgSentTime = millis();
 		}
-	}
 
-	if (modbusLastTime == 0 || millis() - modbusLastTime > (cfgMbCycleTime*1000)) {
+		if (modbusLastTime == 0 || millis() - modbusLastTime > (cfgMbCycleTime*1000)) {
 			if (mb_available()) {
 				//Serial.print(millis());Serial.print(": Sending to BusID: ");Serial.print(id+1);Serial.print(" with msgCnt = ");Serial.println(msgCnt);
 				if (msgCnt0_lastId != 255) {
@@ -162,7 +167,7 @@ void mb_loop() {
 					msgCnt++;
 				}
 				if (msgCnt > 8 || 
-					 (msgCnt > 6 && modbusLastTime != 0)) {						// write the REG_WD_TIME_OUT and REG_STANDBY_CTRL and REG_CURR_LIMIT_FS only on the very first loop
+					(msgCnt > 6 && modbusLastTime != 0)) {						// write the REG_WD_TIME_OUT and REG_STANDBY_CTRL and REG_CURR_LIMIT_FS only on the very first loop
 					msgCnt = 0;
 					//Serial.print("Time:");Serial.println(millis()-modbusLastTime);
 					modbusLastTime = millis();
@@ -171,6 +176,7 @@ void mb_loop() {
 		}
 		mb.task();
 		yield();
+	}
 }
 
 
